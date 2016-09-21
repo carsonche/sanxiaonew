@@ -30,8 +30,8 @@ public class Item : MonoBehaviour {
     public Sprite[] packageItems;
     public Sprite[] bombItems;
     public Sprite[] ingredientItems;
-     
-
+    public Vector3 dragpos;
+    public bool Isdrag = false;
     // Use this for initialization
     void Start () {
         int randomnum = (int)Random.Range(0, 8);
@@ -42,4 +42,35 @@ public class Item : MonoBehaviour {
 	void Update () {
 	
 	}
+    void CheckDrag()
+    {
+        if (Isdrag)
+        {
+            Vector3 DelPos = dragpos - Input.mousePosition;
+            if (Vector3.Magnitude(DelPos) > 0.1f)
+            {
+                if (Mathf.Abs(DelPos.x) > Mathf.Abs(DelPos.y) && DelPos.x > 0)
+                    Debug.Log("zuo");
+                else if (Mathf.Abs(DelPos.x) > Mathf.Abs(DelPos.y) && DelPos.x < 0)
+                    Debug.Log("you");
+                else if (Mathf.Abs(DelPos.x) < Mathf.Abs(DelPos.y) && DelPos.y > 0)
+                    Debug.Log("shang");
+                else if (Mathf.Abs(DelPos.x) < Mathf.Abs(DelPos.y) && DelPos.y < 0)
+                    Debug.Log("xia");
+            }
+
+        }
+    }
+    IEnumerator ExChange()
+    {
+        yield return 0;
+    }
+    public Item switchItem;
+    public squre neighborSquare;
+    void ResetDrag()
+    {
+        Isdrag = false;
+        neighborSquare = null;
+        switchItem = null;
+    }
 }

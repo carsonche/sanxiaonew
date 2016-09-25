@@ -20,8 +20,9 @@ public class Levelmanger : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        gethititem();
+
+    }
     void Inititems(int num)
     {
         int col=LevelNUM+5;
@@ -40,5 +41,21 @@ public class Levelmanger : MonoBehaviour {
         }
          
     }
+    void gethititem()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Collider2D hit = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            if (hit != null) { 
+            if (hit.gameObject.GetComponent<Item>() != null)
+            {
+                Item item = hit.gameObject.GetComponent<Item>();
+                item.Isdrag = true;
+                item.dragpos = Input.mousePosition;
+            }
 
+        }
+        }
+
+    }
 }

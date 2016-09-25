@@ -37,26 +37,39 @@ public class Item : MonoBehaviour {
         int randomnum = (int)Random.Range(0, 8);
         Sprrenderer.sprite = items[randomnum];
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    void Update()
+    {
+        CheckDrag();
+    }
     void CheckDrag()
     {
         if (Isdrag)
         {
+            Debug.Log(Isdrag);
             Vector3 DelPos = dragpos - Input.mousePosition;
             if (Vector3.Magnitude(DelPos) > 0.1f)
             {
                 if (Mathf.Abs(DelPos.x) > Mathf.Abs(DelPos.y) && DelPos.x > 0)
+                {
                     Debug.Log("zuo");
+                    Isdrag = false;
+                }  
                 else if (Mathf.Abs(DelPos.x) > Mathf.Abs(DelPos.y) && DelPos.x < 0)
+                {
                     Debug.Log("you");
+                    Isdrag = false;
+                }
                 else if (Mathf.Abs(DelPos.x) < Mathf.Abs(DelPos.y) && DelPos.y > 0)
-                    Debug.Log("shang");
-                else if (Mathf.Abs(DelPos.x) < Mathf.Abs(DelPos.y) && DelPos.y < 0)
+                {
                     Debug.Log("xia");
+                    Isdrag = false;
+                } 
+                else if (Mathf.Abs(DelPos.x) < Mathf.Abs(DelPos.y) && DelPos.y < 0)
+                {
+                    Debug.Log("shang");
+                    Isdrag = false;
+                }
+          
             }
 
         }
